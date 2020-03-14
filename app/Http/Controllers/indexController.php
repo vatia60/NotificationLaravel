@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Mail\VerificationEmail;
-use App\Notifications\VerifyEmail;
+use App\Notifications\emailVerify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -39,7 +39,7 @@ class indexController extends Controller
 
         $user = User::create($data);
 
-        $user->notify(new VerifyEmail($user));
+        $user->notify(new emailVerify($user));
 
 
         session()->flash('message', 'Successfully Register!');

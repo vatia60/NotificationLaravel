@@ -8,10 +8,9 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\User;
 
-class VerifyEmail extends Notification implements ShouldQueue
+class emailVerify extends Notification implements ShouldQueue
 {
     use Queueable;
-
     private $user;
 
     /**
@@ -44,9 +43,9 @@ class VerifyEmail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Dear' . $this->user->username)
-                    ->line('Your account created successfully.')
-                    ->action('Notification Action', route('verify', $this->user->email_verification_token))
+                    ->line('Dear ' . $this->user->username)
+                    ->line('Token ' . $this->user->email_verification_token)
+                    ->action('Click Here', route('verify', $this->user->email_verification_token))
                     ->line('Thank you for using our application!');
     }
 
